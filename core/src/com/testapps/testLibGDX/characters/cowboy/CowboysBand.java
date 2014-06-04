@@ -30,6 +30,7 @@ public class CowboysBand {
     }
 
     public void dispose() {
+
         cowboyTexture.dispose();
     }
 }

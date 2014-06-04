@@ -14,7 +14,7 @@ public class CowboyWalkingRight extends CowboyAnimation{
     @Override
     protected void createAnimation(Array<TextureRegion> regions, float frameDuration){
         Array<TextureRegion> animationRegions = new Array();
-        for(int i = 0; i < 8; i++)
+        for(int i = 44; i < 52; i++)
         {
             animationRegions.add(regions.get(i));
         }

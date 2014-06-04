@@ -13,7 +13,7 @@ public class CowboyController {
 
 
         /////////////////////////////////
-        testAnimation();
+        executeTest();
         /////////////////////////////////
     }
 
@@ -21,7 +21,8 @@ public class CowboyController {
         this.view.render(batch, elapsedTime);
     }
 
-    private void testAnimation(){
-        this.view.moveRight();
+    private void executeTest(){
+        //this.view.shootLeft();
+        this.view.stop(new CowboyOrientation(CowboyOrientation.STOP_NW));
     }
 }
