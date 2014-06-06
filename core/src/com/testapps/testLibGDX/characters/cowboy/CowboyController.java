@@ -5,12 +5,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class CowboyController {
-    CowboyView view;
+    private Integer id;
+    private CowboyView view;
 
-    public CowboyController(Texture cowboy) {
+    public CowboyController(Texture cowboy, Integer id) {
 
         this.view = new CowboyView(cowboy);
-
+        this.id = id;
 
         /////////////////////////////////
         executeTest();

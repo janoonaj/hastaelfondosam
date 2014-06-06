@@ -11,6 +11,7 @@ public class MyGdxGame implements ApplicationListener{
     private SpriteBatch batch;
     private float elapsedTime = 0;
     private CowboysBand cowboysBand;
+    private BattleFieldController battleField;
     
 	
 	@Override
@@ -19,10 +20,12 @@ public class MyGdxGame implements ApplicationListener{
         batch = new SpriteBatch();
 
         createCowboys();
+        battleField.create(this.cowboysBand);
 	}
 
     private void createCowboys() {
         cowboysBand = new CowboysBand();
+        cowboysBand.addCowboyToBand();
         cowboysBand.addCowboyToBand();
     }
 
@@ -33,12 +36,13 @@ public class MyGdxGame implements ApplicationListener{
 
     @Override
 	public void render () {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(255f/255.0f, 205f/255.0f, 124f/255.0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         elapsedTime += Gdx.graphics.getDeltaTime();
 
         batch.begin();
         this.cowboysBand.render(batch, elapsedTime);
+        this.battleField.render(batch);
         batch.end();
 	}
 
