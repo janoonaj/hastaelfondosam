@@ -10,7 +10,6 @@ import com.testapps.testLibGDX.characters.cowboy.CowboysBand;
 public class MyGdxGame implements ApplicationListener{
     private SpriteBatch batch;
     private float elapsedTime = 0;
-    private CowboysBand cowboysBand;
     private BattleFieldController battleField;
     
 	
@@ -18,16 +17,9 @@ public class MyGdxGame implements ApplicationListener{
 	public void create () {
 
         batch = new SpriteBatch();
-
-        createCowboys();
-        battleField.create(this.cowboysBand);
+        this.battleField = new BattleFieldController();
+        battleField.create();
 	}
-
-    private void createCowboys() {
-        cowboysBand = new CowboysBand();
-        cowboysBand.addCowboyToBand();
-        cowboysBand.addCowboyToBand();
-    }
 
     @Override
     public void resize(int width, int height) {
@@ -41,8 +33,7 @@ public class MyGdxGame implements ApplicationListener{
         elapsedTime += Gdx.graphics.getDeltaTime();
 
         batch.begin();
-        this.cowboysBand.render(batch, elapsedTime);
-        this.battleField.render(batch);
+        this.battleField.render(batch, elapsedTime);
         batch.end();
 	}
 
@@ -59,8 +50,6 @@ public class MyGdxGame implements ApplicationListener{
 
     @Override
     public void dispose() {
-
         batch.dispose();
-        cowboysBand.dispose();
     }
 }

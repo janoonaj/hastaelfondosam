@@ -2,7 +2,7 @@ package com.testapps.testLibGDX;
 
 
 import com.badlogic.gdx.Gdx;
-import com.testapps.testLibGDX.characters.cowboy.CowboyController;
+import com.testapps.testLibGDX.characters.cowboy.Cowboy;
 import com.testapps.testLibGDX.characters.cowboy.CowboyOrientation;
 import com.testapps.testLibGDX.characters.cowboy.CowboysBand;
 
@@ -18,8 +18,8 @@ public class BattleFieldView {
     }
 
     private void displayCowboys(CowboysBand cowboysBand) {
-        CowboyController cowboy1 = cowboysBand.getCowboy(1);
-        CowboyController cowboy2 = cowboysBand.getCowboy(2);
+        Cowboy cowboy1 = cowboysBand.getCowboy(1);
+        Cowboy cowboy2 = cowboysBand.getCowboy(2);
         Point ptUpperCenter  = new Point(Gdx.graphics.getWidth() / 2 - cowboy1.getWidth() / 2,
                 Gdx.graphics.getHeight() - cowboy1.getHeight());
         cowboy1.setPos(ptUpperCenter);

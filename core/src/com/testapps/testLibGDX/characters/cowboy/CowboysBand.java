@@ -1,44 +1,35 @@
 package com.testapps.testLibGDX.characters.cowboy;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 public class CowboysBand {
-    HashMap<Integer, CowboyController> cowboysControllers;
-    private Texture cowboyTexture;
-
-    private Integer currentID;
+    HashMap<Integer, Cowboy> cowboysControllers;
+    private CowboyFactory factory;
 
     public CowboysBand() {
-        currentID = 1;
-        cowboysControllers = new HashMap<Integer, CowboyController>();
-        this.cowboyTexture = new Texture(Gdx.files.internal("cowboyAndando.png"));
+        cowboysControllers = new HashMap<Integer, Cowboy>();
+        factory = new CowboyFactory();
+
     }
 
-    public void addCowboyToBand(){
-        CowboyController newCowboy = new CowboyController(cowboyTexture, this.currentID);
-        cowboysControllers.put(currentID, newCowboy);
-        currentID++;
+    public void addCowboyToBand(Cowboy cowboy){
+        cowboysControllers.put(cowboy.getID(), cowboy);
     }
 
-    public CowboyController getCowboy(Integer id){
+    public Cowboy getCowboy(Integer id){
         return this.cowboysControllers.get(id);
     }
 
     public void render(SpriteBatch batch, float elapsedTime){
-        for (CowboyController cb : this.cowboysControllers.values()) {
+        for (Cowboy cb : this.cowboysControllers.values()) {
             cb.render(batch, elapsedTime);
         }
 
     }
 
-    public void dispose() {
-        currentID = 1;
-        cowboyTexture.dispose();
+    public void dispose(){
+        this.factory.dispose();
     }
 }
