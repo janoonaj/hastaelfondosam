@@ -3,8 +3,9 @@ package com.testapps.testLibGDX;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.testapps.testLibGDX.characters.cowboy.CowboysBand;
+
 
 
 public class MyGdxGame implements ApplicationListener{
@@ -15,7 +16,6 @@ public class MyGdxGame implements ApplicationListener{
 	
 	@Override
 	public void create () {
-
         batch = new SpriteBatch();
         this.battleField = new BattleFieldController();
         battleField.create();

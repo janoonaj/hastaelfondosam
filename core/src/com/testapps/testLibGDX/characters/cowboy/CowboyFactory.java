@@ -23,7 +23,6 @@ public class CowboyFactory {
     public Cowboy createMyPlayer() {
         CowboyView view = new CowboyViewMainPlayer(this.cowboyTexture);
         Cowboy cowboy = createCowboy(view, 1);
-        addBlueCircle(cowboy);
         return cowboy;
     }
 
@@ -36,9 +35,5 @@ public class CowboyFactory {
 
     private Cowboy createCowboy(CowboyView view, int id){
         return new Cowboy(view, id);
-    }
-
-    private void addBlueCircle(Cowboy cowboy){
-        Texture blueCircle = new Texture(Gdx.files.internal("selector.png"));
     }
 }
