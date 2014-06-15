@@ -10,6 +10,7 @@ import java.awt.Point;
 public class Cowboy {
     private int id;
     private CowboyView view;
+    private int boardPos;
 
     public Cowboy(CowboyView view, int id) {
 
@@ -66,4 +67,12 @@ public class Cowboy {
     }
 
     public int getID() {return this.id;}
+
+    public int getBoardPos() {
+        return boardPos;
+    }
+
+    public void setBoardPos(int boardPos) {
+        this.boardPos = boardPos;
+    }
 }

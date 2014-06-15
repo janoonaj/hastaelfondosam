@@ -3,8 +3,11 @@ package com.testapps.testLibGDX.gameStates;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Array;
 import com.testapps.testLibGDX.buttons.ButtonController;
 import com.testapps.testLibGDX.buttons.IButtonsSubscribed;
+import com.testapps.testLibGDX.characters.cowboy.Cowboy;
+import com.testapps.testLibGDX.characters.cowboy.CowboysBand;
 
 import java.awt.Point;
 import java.util.HashMap;
@@ -12,9 +15,11 @@ import java.util.HashMap;
 public class SelectPositionState implements IGameStates{
     ButtonController buttonController;
     HashMap<Integer, SelectorButton> selectorsButtons;
+    CowboysBand band;
 
-    public SelectPositionState(ButtonController buttonController) {
+    public SelectPositionState(ButtonController buttonController, CowboysBand band) {
         this.buttonController = buttonController;
+        this.band = band;
         createSelectorButtons();
     }
 
@@ -54,7 +59,8 @@ public class SelectPositionState implements IGameStates{
 
     @Override
     public void render(SpriteBatch batch, float elapsedTime) {
-        for(SelectorButton bttn : this.selectorsButtons.values())
+        Array<SelectorButton> nextMovements = calculateNextMovements();
+        for(SelectorButton bttn : nextMovements)
         {
             bttn.render(batch);
         }
@@ -69,9 +75,28 @@ public class SelectPositionState implements IGameStates{
         }
     }
 
-    public void selectorPushed(Integer id){
-        System.out.print(id.toString());
+    private Array<SelectorButton> calculateNextMovements(){
+        Array<SelectorButton> availablePositions = new Array<SelectorButton>();
+        Integer myPlayerPos = this.band.getMyCowboy().getBoardPos();
+        if(myPlayerPos == 1)
+        {
+            availablePositions.add(this.selectorsButtons.get(2));
+            availablePositions.add(this.selectorsButtons.get(6));
+        }
+        else if(myPlayerPos == 6)
+        {
+            availablePositions.add(this.selectorsButtons.get(1));
+            availablePositions.add(this.selectorsButtons.get(5));
+        }
+        else
+        {
+            availablePositions.add(this.selectorsButtons.get(myPlayerPos - 1));
+            availablePositions.add(this.selectorsButtons.get(myPlayerPos + 1));
+        }
+
+        return availablePositions;
     }
+
 
 
 }
@@ -103,7 +128,7 @@ class SelectorButton implements IButtonsSubscribed{
         if(screenX >= this.pos.x && screenX <= this.pos.x + this.texture.getWidth() &&
                 screenY >= this.pos.y && screenY <= this.pos.y + this.texture.getHeight())
         {
-            state.selectorPushed(this.id);
+            //state.selectorPushed(this.id);
         }
     }
 }

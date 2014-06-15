@@ -18,6 +18,10 @@ public class CowboysBand {
         cowboysControllers.put(cowboy.getID(), cowboy);
     }
 
+    public Cowboy getMyCowboy(){
+        return this.cowboysControllers.get(1);
+    }
+
     public Cowboy getCowboy(Integer id){
         return this.cowboysControllers.get(id);
     }

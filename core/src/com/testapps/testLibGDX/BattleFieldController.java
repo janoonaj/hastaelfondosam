@@ -30,7 +30,7 @@ public class BattleFieldController {
         createCowboys();
 
         firstState = new FirstState(cowboysBand);
-        selectPositionState = new SelectPositionState(buttonController);
+        selectPositionState = new SelectPositionState(buttonController, cowboysBand);
 
 
         firstState.init();

@@ -23,12 +23,14 @@ public class CowboyFactory {
     public Cowboy createMyPlayer() {
         CowboyView view = new CowboyViewMainPlayer(this.cowboyTexture);
         Cowboy cowboy = createCowboy(view, 1);
+        cowboy.setBoardPos(4);
         return cowboy;
     }
 
     public Cowboy createEnemy() {
         CowboyView view = new CowboyView(this.cowboyTexture);
         Cowboy cowboy = createCowboy(view, currentID);
+        cowboy.setBoardPos(1);
         currentID++;
         return cowboy;
     }
