@@ -97,6 +97,15 @@ public class SelectPositionState implements IGameStates{
         return availablePositions;
     }
 
+    public void selectorPushed (SelectorButton selector)
+    {
+        int height20Percent = Gdx.graphics.getHeight() / 5;
+        int width25Percent = Gdx.graphics.getWidth() / 4;
+        Point pos3 = new Point(width25Percent * 3 - selector.getWidth() / 2,
+                Gdx.graphics.getHeight() - height20Percent*3 - selector.getHeight() / 2);
+        this.band.getMyCowboy().moveTo(pos3);
+    }
+
 
 
 }
@@ -123,12 +132,22 @@ class SelectorButton implements IButtonsSubscribed{
         texture.dispose();
     }
 
+    public int getWidth()
+    {
+        return this.texture.getWidth();
+    }
+
+    public int getHeight()
+    {
+        return this.texture.getHeight();
+    }
+
     @Override
     public void screenTouched(int screenX, int screenY) {
         if(screenX >= this.pos.x && screenX <= this.pos.x + this.texture.getWidth() &&
                 screenY >= this.pos.y && screenY <= this.pos.y + this.texture.getHeight())
         {
-            //state.selectorPushed(this.id);
+            state.selectorPushed(this);
         }
     }
 }
