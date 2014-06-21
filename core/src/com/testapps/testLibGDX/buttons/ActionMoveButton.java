@@ -1,6 +1,5 @@
 package com.testapps.testLibGDX.buttons;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -47,5 +46,10 @@ public class ActionMoveButton implements IActionButton{
     @Override
     public void hide() {
         this.visible = false;
+    }
+
+    @Override
+    public void dispose() {
+        this.texture.dispose();
     }
 }

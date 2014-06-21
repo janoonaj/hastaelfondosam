@@ -16,4 +16,6 @@ public interface IActionButton {
     void show();
 
     void hide();
+
+    public void dispose();
 }

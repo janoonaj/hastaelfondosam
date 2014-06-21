@@ -50,6 +50,8 @@ public class MyGdxGame implements ApplicationListener{
 
     @Override
     public void dispose() {
+
         batch.dispose();
+        this.battleField.dispose();
     }
 }

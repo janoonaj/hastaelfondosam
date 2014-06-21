@@ -57,7 +57,6 @@ public class BattleFieldController {
     }
 
     public void buttonPressed(IActionButton actionBttn) {
-        //state.dispose(); TODO it's Deleting textures... next time the state is required the images are not hidden
         if(actionBttn instanceof ActionMoveButton)
         {
             state = this.selectPositionState;
@@ -66,7 +65,6 @@ public class BattleFieldController {
     }
 
     public void buttonPressed(IButtonsSubscribed buttonSubscribed) {
-        //state.dispose(); TODO it's Deleting textures... next time the state is required the images are not hidden
         if(buttonSubscribed instanceof SelectorButtonMovePlayer)
         {
             state = this.mainState;
@@ -74,4 +72,13 @@ public class BattleFieldController {
         state.init();
     }
 
+    public void dispose() {
+        initGameState.dispose();
+        mainState.dispose();
+        selectPositionState.dispose();
+
+        cowboyFactory.dispose();
+        cowboysBand.dispose();
+        buttonController.dispose();
+    }
 }
