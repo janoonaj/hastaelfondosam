@@ -2,22 +2,27 @@ package com.testapps.testLibGDX;
 
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.testapps.testLibGDX.buttons.ActionMoveButton;
 import com.testapps.testLibGDX.buttons.ButtonController;
 import com.testapps.testLibGDX.buttons.IActionButton;
+import com.testapps.testLibGDX.buttons.IButtonsSubscribed;
 import com.testapps.testLibGDX.characters.cowboy.Cowboy;
 import com.testapps.testLibGDX.characters.cowboy.CowboyFactory;
 import com.testapps.testLibGDX.characters.cowboy.CowboysBand;
-import com.testapps.testLibGDX.gameStates.FirstState;
+import com.testapps.testLibGDX.gameStates.InitGameState;
 import com.testapps.testLibGDX.gameStates.IGameStates;
-import com.testapps.testLibGDX.gameStates.SelectPositionState;
+import com.testapps.testLibGDX.gameStates.MainState;
+import com.testapps.testLibGDX.gameStates.selectPositionState.SelectPositionState;
+import com.testapps.testLibGDX.gameStates.selectPositionState.SelectorButtonMovePlayer;
 
 public class BattleFieldController {
     CowboyFactory cowboyFactory;
     CowboysBand cowboysBand;
     ButtonController buttonController;
 
-    IGameStates state;
-    FirstState firstState;
+    private IGameStates state;
+    private InitGameState initGameState;
+    private MainState mainState;
     SelectPositionState selectPositionState;
 
     public BattleFieldController() {
@@ -29,12 +34,13 @@ public class BattleFieldController {
     public void create() {
         createCowboys();
 
-        firstState = new FirstState(cowboysBand);
-        selectPositionState = new SelectPositionState(buttonController, cowboysBand);
+        initGameState = new InitGameState(cowboysBand);
+        mainState = new MainState(this.buttonController);
+        selectPositionState = new SelectPositionState(this, buttonController, cowboysBand);
 
 
-        firstState.init();
-        state = firstState;
+        initGameState.init();
+        state = initGameState;
     }
 
     private void createCowboys() {
@@ -51,8 +57,21 @@ public class BattleFieldController {
     }
 
     public void buttonPressed(IActionButton actionBttn) {
-        state.dispose();
-        state = selectPositionState;
+        //state.dispose(); TODO it's Deleting textures... next time the state is required the images are not hidden
+        if(actionBttn instanceof ActionMoveButton)
+        {
+            state = this.selectPositionState;
+        }
         state.init();
     }
+
+    public void buttonPressed(IButtonsSubscribed buttonSubscribed) {
+        //state.dispose(); TODO it's Deleting textures... next time the state is required the images are not hidden
+        if(buttonSubscribed instanceof SelectorButtonMovePlayer)
+        {
+            state = this.mainState;
+        }
+        state.init();
+    }
+
 }

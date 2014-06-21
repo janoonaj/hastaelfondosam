@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.testapps.testLibGDX.BattleFieldController;
+import com.testapps.testLibGDX.Utils;
 
 import java.awt.Point;
 
@@ -22,6 +23,7 @@ public class ButtonController implements InputProcessor{
         menuButtons = new Array<IActionButton>();
         subscribedButtons = new Array<IButtonsSubscribed>();
         createMoveButton();
+        this.showMenuButtons();
     }
 
     private void createMoveButton() {
@@ -42,6 +44,22 @@ public class ButtonController implements InputProcessor{
         this.subscribedButtons.add(button);
     }
 
+    public void hideMenuButtons(){
+        //Don't use Iterators because it can crash with for loop in touchDown
+        for(int i = 0; i < menuButtons.size; i++)
+        {
+            menuButtons.get(i).hide();
+        }
+    }
+
+    public void showMenuButtons(){
+        //Don't use Iterators because it can crash with for loop in touchDown
+        for(int i = 0; i < menuButtons.size; i++)
+        {
+            menuButtons.get(i).show();
+        }
+    }
+
     @Override
     public boolean keyDown(int keycode) {
         return false;
@@ -60,6 +78,7 @@ public class ButtonController implements InputProcessor{
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         screenY = convertFromTouchToScreenCoordenades(screenY);
+
         for(IActionButton actionBttn : this.menuButtons)
         {
            if(actionBttn.touchEvent(screenX, screenY))

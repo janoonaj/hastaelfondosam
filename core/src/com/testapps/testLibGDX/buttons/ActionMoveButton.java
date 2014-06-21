@@ -9,6 +9,7 @@ import java.awt.Point;
 public class ActionMoveButton implements IActionButton{
     Texture texture;
     Point pos;
+    Boolean visible = true;
 
     public ActionMoveButton(Texture texture, Point pos) {
         this.texture = texture;
@@ -17,7 +18,8 @@ public class ActionMoveButton implements IActionButton{
 
     @Override
     public void render(SpriteBatch batch, float elapsedTime) {
-        batch.draw(this.texture, pos.x, pos.y);
+        if(this.visible)
+            batch.draw(this.texture, pos.x, pos.y);
     }
 
     @Override
@@ -39,11 +41,11 @@ public class ActionMoveButton implements IActionButton{
 
     @Override
     public void show() {
-
+        this.visible = true;
     }
 
     @Override
     public void hide() {
-
+        this.visible = false;
     }
 }

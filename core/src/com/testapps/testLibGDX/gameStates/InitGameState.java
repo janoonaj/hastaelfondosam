@@ -9,10 +9,16 @@ import com.testapps.testLibGDX.characters.cowboy.CowboysBand;
 
 import java.awt.Point;
 
-public class FirstState implements IGameStates{
+
+/*
+Game first screen creation. Displays the first disposition of the players and
+game elements in the Battlefield.
+ */
+
+public class InitGameState implements IGameStates{
     CowboysBand cowboys;
 
-    public FirstState(CowboysBand cowboysBand) {
+    public InitGameState(CowboysBand cowboysBand) {
         cowboys = cowboysBand;
     }
 

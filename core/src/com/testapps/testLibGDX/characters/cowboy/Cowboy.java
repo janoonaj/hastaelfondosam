@@ -3,6 +3,7 @@ package com.testapps.testLibGDX.characters.cowboy;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.testapps.testLibGDX.Utils;
 import com.testapps.testLibGDX.characters.cowboy.views.CowboyView;
 
 import java.awt.Point;
@@ -12,9 +13,10 @@ public class Cowboy {
     private CowboyView view;
     private int boardPos;
 
-    final private float speed = 1.5f;
+    final private float speed = 1f;
     private boolean moving = false;
     private Vector2 moveTo;
+    private Vector2 currentDirection;
 
     public Cowboy(CowboyView view, int id) {
 
@@ -26,32 +28,35 @@ public class Cowboy {
         if(this.moving)
         {
             updatePos(elapsedTime);
+            if(this.moving) {
+                this.view.updateWalkingAnimation(this.currentDirection);
+            }
         }
         this.view.render(batch, elapsedTime);
     }
 
-    public void moveRight(){
-        this.view.moveRight();
+    public void showAnimWalkRight(){
+        this.view.showAnimWalkRight();
     }
 
-    public void moveLeft(){
-        this.view.moveLeft();
+    public void showAnimWalkLeft(){
+        this.view.showAnimWalkLeft();
     }
 
-    public void shootUp(){
-        this.view.shootUp();
+    public void showAnimShootUp(){
+        this.view.showAnimShootUp();
     }
 
-    public void shootDown(){
-       this.view.shootDown();
+    public void showAnimShootDown(){
+       this.view.showAnimShootDown();
     }
 
-    public void shootLeft(){
-        this.view.shootLeft();
+    public void showAnimShootLeft(){
+        this.view.showAnimShootLeft();
     }
 
-    public void shootRight(){
-        this.view.shootRight();
+    public void showAnimShootRight(){
+        this.view.showAnimShootRight();
     }
 
     public void stop(CowboyOrientation orientation){
@@ -92,7 +97,9 @@ public class Cowboy {
     private void updatePos(float elapsedTime)
     {
         //TODO: direction should be wrong, the movement is not linear.
+        //Create it as class parameter does not solve the issue
         //Maybe problems between floats and integers?
+
 
 
         if(this.moving == false)
@@ -102,11 +109,10 @@ public class Cowboy {
         Vector2 newPos = currentPos.cpy();
 
         float realDistanceToEnd = Vector2.dst(newPos.x, newPos.y, moveTo.x, moveTo.y);
-
-        Vector2 direction = this.moveTo.cpy();
-        direction.sub(newPos).nor();
-        newPos.x += this.speed * direction.x * elapsedTime;
-        newPos.y += this.speed * direction.y * elapsedTime;
+        currentDirection = this.moveTo.cpy();
+        currentDirection.sub(newPos).nor();
+        newPos.x += this.speed * currentDirection.x * elapsedTime;
+        newPos.y += this.speed * currentDirection.y * elapsedTime;
 
         float distanceMoved = Vector2.dst(newPos.x, newPos.y, currentPos.x, currentPos.y);
         Point nextPosPt = new Point((int)newPos.x, (int)newPos.y);
@@ -115,6 +121,7 @@ public class Cowboy {
             nextPosPt.x = (int) newPos.x;
             nextPosPt.y = (int) newPos.y;
             this.moving = false;
+            this.view.stop(new CowboyOrientation(CowboyOrientation.STOP_N));
         }
 
         this.setPos(nextPosPt);

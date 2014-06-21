@@ -4,6 +4,7 @@ package com.testapps.testLibGDX.characters.cowboy.views;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.testapps.testLibGDX.characters.cowboy.CowboyOrientation;
 import com.testapps.testLibGDX.characters.cowboy.animations.CowboyAnimation;
 import com.testapps.testLibGDX.characters.cowboy.animations.CowboyShootingDown;
@@ -70,37 +71,49 @@ public class CowboyView {
         this.height = currentFrame.getRegionHeight();
     }
 
-    public void moveRight(){
+    public void showAnimWalkRight(){
+        if(this.animation instanceof CowboyWalkingRight)
+          return;
         this.stoppedFrame = null;
         this.animation = new CowboyWalkingRight(this.texture, FRAME_DURATION);
         updateWidthAndHeight(this.animation.getFrame(0, false));
     }
 
-    public void moveLeft(){
+    public void showAnimWalkLeft(){
+        if(this.animation instanceof CowboyWalkingLeft)
+            return;
         this.stoppedFrame = null;
         this.animation = new CowboyWalkingLeft(this.texture, FRAME_DURATION);
         updateWidthAndHeight(this.animation.getFrame(0, false));
     }
 
-    public void shootUp(){
+    public void showAnimShootUp(){
+        if(this.animation instanceof CowboyShootingUp)
+            return;
         this.stoppedFrame = null;
         this.animation = new CowboyShootingUp(this.texture, FRAME_DURATION);
         updateWidthAndHeight(this.animation.getFrame(0, false));
     }
 
-    public void shootDown(){
+    public void showAnimShootDown(){
+        if(this.animation instanceof CowboyShootingDown)
+            return;
         this.stoppedFrame = null;
         this.animation = new CowboyShootingDown(this.texture, FRAME_DURATION);
         updateWidthAndHeight(this.animation.getFrame(0, false));
     }
 
-    public void shootLeft(){
+    public void showAnimShootLeft(){
+        if(this.animation instanceof CowboyShootingLeft)
+            return;
         this.stoppedFrame = null;
         this.animation = new CowboyShootingLeft(this.texture, FRAME_DURATION);
         updateWidthAndHeight(this.animation.getFrame(0, false));
     }
 
-    public void shootRight(){
+    public void showAnimShootRight(){
+        if(this.animation instanceof CowboyShootingRight)
+            return;
         this.stoppedFrame = null;
         this.animation = new CowboyShootingRight(this.texture, FRAME_DURATION);
         updateWidthAndHeight(this.animation.getFrame(0, false));
@@ -127,5 +140,16 @@ public class CowboyView {
 
     public int getHeight() {
         return height;
+    }
+
+    public void updateWalkingAnimation(Vector2 currentDirection) {
+        if (currentDirection.x < 0)
+        {
+            this.showAnimWalkLeft();
+        }
+        else
+        {
+            this.showAnimWalkRight();
+        }
     }
 }
