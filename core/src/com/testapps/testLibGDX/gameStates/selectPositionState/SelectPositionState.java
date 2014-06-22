@@ -5,10 +5,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.testapps.testLibGDX.BattleFieldController;
+import com.testapps.testLibGDX.PositionsOnScreen;
 import com.testapps.testLibGDX.buttons.ButtonController;
 import com.testapps.testLibGDX.characters.cowboy.CowboysBand;
 import com.testapps.testLibGDX.gameStates.IGameStates;
-import com.testapps.testLibGDX.gameStates.selectPositionState.SelectorButtonMovePlayer;
 
 import java.awt.Point;
 import java.util.HashMap;
@@ -28,29 +28,12 @@ public class SelectPositionState implements IGameStates {
 
     private void createSelectorButtons() {
         Texture selector = new Texture(Gdx.files.internal("moveToSelector.png"));
-        int height20Percent = Gdx.graphics.getHeight() / 5;
-        int width25Percent = Gdx.graphics.getWidth() / 4;
-        Point pos1 = new Point(width25Percent * 2 - selector.getWidth() / 2,
-                Gdx.graphics.getHeight() - height20Percent - selector.getHeight() / 2);
-        Point pos2 = new Point(width25Percent * 3 - selector.getWidth() / 2,
-                Gdx.graphics.getHeight() - height20Percent*2 - selector.getHeight() / 2);
-        Point pos3 = new Point(width25Percent * 3 - selector.getWidth() / 2,
-                Gdx.graphics.getHeight() - height20Percent*3 - selector.getHeight() / 2);
-        Point pos4 = new Point(width25Percent * 2 - selector.getWidth() / 2,
-                height20Percent - selector.getHeight() / 2);
-        Point pos5 = new Point(width25Percent - selector.getWidth() / 2,
-                Gdx.graphics.getHeight() - height20Percent*3 - selector.getHeight() / 2);
-        Point pos6 = new Point(width25Percent - selector.getWidth() / 2,
-                Gdx.graphics.getHeight() - height20Percent*2 - selector.getHeight() / 2);
+
         selectorsButtons = new HashMap<Integer, SelectorButtonMovePlayer>();
-        selectorsButtons.put(1, new SelectorButtonMovePlayer(1, selector, pos1, this));
-        selectorsButtons.put(2, new SelectorButtonMovePlayer(2, selector, pos2, this));
-        selectorsButtons.put(3, new SelectorButtonMovePlayer(3, selector, pos3, this));
-        selectorsButtons.put(4, new SelectorButtonMovePlayer(4, selector, pos4, this));
-        selectorsButtons.put(5, new SelectorButtonMovePlayer(5, selector, pos5, this));
-        selectorsButtons.put(6, new SelectorButtonMovePlayer(6, selector, pos6, this));
-        for(SelectorButtonMovePlayer bttn : this.selectorsButtons.values())
+        for(Integer i = 1; i <= 6; i++)
         {
+            SelectorButtonMovePlayer bttn = new SelectorButtonMovePlayer(selector, i, this);
+            selectorsButtons.put(i, bttn);
             this.buttonController.subscribeButton(bttn);
         }
     }
@@ -102,7 +85,7 @@ public class SelectPositionState implements IGameStates {
 
     public void selectorPushed (SelectorButtonMovePlayer selector)
     {
-        this.band.getMyCowboy().moveTo(selector.getPos());
+        this.band.getMyCowboy().moveTo(selector.getBoardPos());
         battleFieldController.buttonPressed(selector);
     }
 }

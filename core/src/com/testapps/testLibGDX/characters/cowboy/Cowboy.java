@@ -3,7 +3,7 @@ package com.testapps.testLibGDX.characters.cowboy;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.testapps.testLibGDX.Utils;
+import com.testapps.testLibGDX.PositionsOnScreen;
 import com.testapps.testLibGDX.characters.cowboy.views.CowboyView;
 
 import java.awt.Point;
@@ -16,6 +16,7 @@ public class Cowboy {
     final private float speed = 1f;
     private boolean moving = false;
     private Vector2 moveTo;
+    private Integer moveToBoardPosition;
     private Vector2 currentDirection;
 
     public Cowboy(CowboyView view, int id) {
@@ -33,30 +34,6 @@ public class Cowboy {
             }
         }
         this.view.render(batch, elapsedTime);
-    }
-
-    public void showAnimWalkRight(){
-        this.view.showAnimWalkRight();
-    }
-
-    public void showAnimWalkLeft(){
-        this.view.showAnimWalkLeft();
-    }
-
-    public void showAnimShootUp(){
-        this.view.showAnimShootUp();
-    }
-
-    public void showAnimShootDown(){
-       this.view.showAnimShootDown();
-    }
-
-    public void showAnimShootLeft(){
-        this.view.showAnimShootLeft();
-    }
-
-    public void showAnimShootRight(){
-        this.view.showAnimShootRight();
     }
 
     public void stop(CowboyOrientation orientation){
@@ -89,7 +66,9 @@ public class Cowboy {
         this.boardPos = boardPos;
     }
 
-    public void moveTo(Point pos3) {
+    public void moveTo(Integer boardPos) {
+        moveToBoardPosition = boardPos;
+        Point pos3 = PositionsOnScreen.getScreenPos(boardPos);
         moveTo = new Vector2((float)(pos3.x), (float)(pos3.y));
         moving = true;
     }
@@ -122,6 +101,8 @@ public class Cowboy {
             nextPosPt.y = (int) newPos.y;
             this.moving = false;
             this.view.stop(new CowboyOrientation(CowboyOrientation.STOP_N));
+            this.boardPos = this.moveToBoardPosition;
+            this.moveToBoardPosition = null;
         }
 
         this.setPos(nextPosPt);

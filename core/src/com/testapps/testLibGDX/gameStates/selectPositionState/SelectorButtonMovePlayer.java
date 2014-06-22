@@ -2,20 +2,23 @@ package com.testapps.testLibGDX.gameStates.selectPositionState;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.testapps.testLibGDX.PositionsOnScreen;
 import com.testapps.testLibGDX.buttons.IButtonsSubscribed;
 
 import java.awt.Point;
 
 public class SelectorButtonMovePlayer implements IButtonsSubscribed {
-    private Integer id;
     private Texture texture;
     private Point pos;
     private SelectPositionState state;
+    private Integer boardPos;
 
-    public SelectorButtonMovePlayer(Integer id, Texture texture, Point pos, SelectPositionState state) {
-        this.id = id;
+    public SelectorButtonMovePlayer(Texture texture, Integer boardPos, SelectPositionState state) {
         this.texture = texture;
-        this.pos = pos;
+        this.pos = PositionsOnScreen.getScreenPos(boardPos);
+        this.pos.x -= texture.getWidth() / 2;
+        this.pos.y -= texture.getHeight() / 2;
+        this.boardPos = boardPos;
         this.state = state;
     }
 
@@ -25,6 +28,10 @@ public class SelectorButtonMovePlayer implements IButtonsSubscribed {
 
     public Point getPos() {
         return this.pos;
+    }
+
+    public Integer getBoardPos(){
+        return this.boardPos;
     }
 
     public void dispose() {

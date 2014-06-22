@@ -32,11 +32,14 @@ public class BattleFieldController {
     }
 
     public void create() {
+        PositionsOnScreen.writeBoardCoordenades();
+
         createCowboys();
 
         initGameState = new InitGameState(cowboysBand);
         mainState = new MainState(this.buttonController);
         selectPositionState = new SelectPositionState(this, buttonController, cowboysBand);
+
 
 
         initGameState.init();
