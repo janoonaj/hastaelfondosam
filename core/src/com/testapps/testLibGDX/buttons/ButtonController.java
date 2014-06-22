@@ -23,6 +23,7 @@ public class ButtonController implements InputProcessor{
         menuButtons = new Array<IActionButton>();
         subscribedButtons = new Array<IButtonsSubscribed>();
         createMoveButton();
+        createShootButton();
         this.showMenuButtons();
     }
 
@@ -31,6 +32,13 @@ public class ButtonController implements InputProcessor{
         Point pos = new Point(Gdx.graphics.getWidth() / 40,
                                 Gdx.graphics.getHeight() - (Gdx.graphics.getHeight() / 40) - texture.getHeight());
         this.menuButtons.add(new ActionMoveButton(texture, pos));
+    }
+
+    private void createShootButton(){
+        Texture texture = new Texture(Gdx.files.internal("gun.png"));
+        Point pos = new Point(Gdx.graphics.getWidth() / 40 + texture.getWidth() * 2,
+                Gdx.graphics.getHeight() - (Gdx.graphics.getHeight() / 40) - texture.getHeight());
+        this.menuButtons.add(new ActionShootButton(texture, pos));
     }
 
     public void render(SpriteBatch batch, float elapsedTime){
