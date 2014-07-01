@@ -12,6 +12,8 @@ public class SelectorButtonMovePlayer implements IButtonsSubscribed {
     private Point pos;
     private SelectPositionState state;
     private Integer boardPos;
+    private Boolean enabled;
+
 
     public SelectorButtonMovePlayer(Texture texture, Integer boardPos, SelectPositionState state) {
         this.texture = texture;
@@ -20,10 +22,23 @@ public class SelectorButtonMovePlayer implements IButtonsSubscribed {
         this.pos.y -= texture.getHeight() / 2;
         this.boardPos = boardPos;
         this.state = state;
+        enabled = false;
     }
 
     public void render(SpriteBatch batch) {
+        if(this.enabled == false)
+            return;
         batch.draw(this.texture, pos.x, pos.y);
+    }
+
+    @Override
+    public void enable() {
+        this.enabled = true;
+    }
+
+    @Override
+    public void disable() {
+        this.enabled = false;
     }
 
     public Integer getBoardPos(){
@@ -44,6 +59,8 @@ public class SelectorButtonMovePlayer implements IButtonsSubscribed {
 
     @Override
     public void screenTouched(int screenX, int screenY) {
+        if(this.enabled == false)
+            return;
         if (screenX >= this.pos.x && screenX <= this.pos.x + this.texture.getWidth() &&
                 screenY >= this.pos.y && screenY <= this.pos.y + this.texture.getHeight()) {
             state.selectorPushed(this);

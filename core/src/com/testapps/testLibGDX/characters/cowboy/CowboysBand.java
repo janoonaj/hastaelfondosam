@@ -1,6 +1,7 @@
 package com.testapps.testLibGDX.characters.cowboy;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Array;
 
 import java.util.HashMap;
 
@@ -31,6 +32,18 @@ public class CowboysBand {
             cb.render(batch, elapsedTime);
         }
 
+    }
+
+    public Array<Cowboy> getEnemies(){
+        Array<Cowboy> enemies = new Array<Cowboy>();
+        for(Cowboy cowboy : this.cowboysControllers.values())
+        {
+            if(cowboy.getID() != 1)
+            {
+                enemies.add(cowboy);
+            }
+        }
+        return enemies;
     }
 
     public void dispose(){

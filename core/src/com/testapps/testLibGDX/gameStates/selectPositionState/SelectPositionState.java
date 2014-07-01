@@ -43,6 +43,10 @@ public class SelectPositionState implements IGameStates {
     public void init() {
         this.buttonController.hideMenuButtons();
         this.nextPossibleMovements = calculateNextMovements();
+        for(SelectorButtonMovePlayer bttn : nextPossibleMovements)
+        {
+            bttn.enable();
+        }
     }
 
     @Override
@@ -60,6 +64,7 @@ public class SelectPositionState implements IGameStates {
         {
             bttn.dispose();
         }
+        nextPossibleMovements = null;
     }
 
     private Array<SelectorButtonMovePlayer> calculateNextMovements(){

@@ -42,7 +42,7 @@ public class BattleFieldController {
         initGameState = new InitGameState(cowboysBand);
         mainState = new MainState(this.buttonController);
         selectPositionState = new SelectPositionState(this, buttonController, cowboysBand);
-        selectShootState = new SelectShootState(buttonController);
+        selectShootState = new SelectShootState(buttonController, cowboysBand);
 
 
         initGameState.init();

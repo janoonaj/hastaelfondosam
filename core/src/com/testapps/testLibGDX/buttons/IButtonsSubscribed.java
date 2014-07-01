@@ -9,4 +9,8 @@ public interface IButtonsSubscribed {
     public void dispose();
 
     public void render(SpriteBatch batch);
+
+    public void enable();
+
+    public void disable();
 }
