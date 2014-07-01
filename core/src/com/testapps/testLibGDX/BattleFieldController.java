@@ -3,6 +3,7 @@ package com.testapps.testLibGDX;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.testapps.testLibGDX.buttons.ActionMoveButton;
+import com.testapps.testLibGDX.buttons.ActionShootButton;
 import com.testapps.testLibGDX.buttons.ButtonController;
 import com.testapps.testLibGDX.buttons.IActionButton;
 import com.testapps.testLibGDX.buttons.IButtonsSubscribed;
@@ -14,6 +15,7 @@ import com.testapps.testLibGDX.gameStates.IGameStates;
 import com.testapps.testLibGDX.gameStates.MainState;
 import com.testapps.testLibGDX.gameStates.selectPositionState.SelectPositionState;
 import com.testapps.testLibGDX.gameStates.selectPositionState.SelectorButtonMovePlayer;
+import com.testapps.testLibGDX.gameStates.selectShootState.SelectShootState;
 
 public class BattleFieldController {
     CowboyFactory cowboyFactory;
@@ -23,7 +25,8 @@ public class BattleFieldController {
     private IGameStates state;
     private InitGameState initGameState;
     private MainState mainState;
-    SelectPositionState selectPositionState;
+    private SelectPositionState selectPositionState;
+    private SelectShootState selectShootState;
 
     public BattleFieldController() {
         cowboyFactory = new CowboyFactory();
@@ -39,7 +42,7 @@ public class BattleFieldController {
         initGameState = new InitGameState(cowboysBand);
         mainState = new MainState(this.buttonController);
         selectPositionState = new SelectPositionState(this, buttonController, cowboysBand);
-
+        selectShootState = new SelectShootState(buttonController);
 
 
         initGameState.init();
@@ -64,6 +67,10 @@ public class BattleFieldController {
         {
             state = this.selectPositionState;
         }
+        else if(actionBttn instanceof ActionShootButton)
+        {
+            state = this.selectShootState;
+        }
         state.init();
     }
 
@@ -72,6 +79,7 @@ public class BattleFieldController {
         {
             state = this.mainState;
         }
+
         state.init();
     }
 

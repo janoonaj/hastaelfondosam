@@ -26,10 +26,6 @@ public class SelectorButtonMovePlayer implements IButtonsSubscribed {
         batch.draw(this.texture, pos.x, pos.y);
     }
 
-    public Point getPos() {
-        return this.pos;
-    }
-
     public Integer getBoardPos(){
         return this.boardPos;
     }

@@ -42,16 +42,16 @@ public class ActionShootButton implements IActionButton{
 
     @Override
     public void show() {
-
+        this.visible = true;
     }
 
     @Override
     public void hide() {
-
+        this.visible = false;
     }
 
     @Override
     public void dispose() {
-
+        this.texture.dispose();
     }
 }

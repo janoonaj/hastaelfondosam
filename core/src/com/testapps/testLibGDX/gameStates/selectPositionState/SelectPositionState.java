@@ -17,6 +17,7 @@ public class SelectPositionState implements IGameStates {
     ButtonController buttonController;
     BattleFieldController battleFieldController;
     HashMap<Integer, SelectorButtonMovePlayer> selectorsButtons;
+    Array<SelectorButtonMovePlayer> nextPossibleMovements;
     CowboysBand band;
 
     public SelectPositionState(BattleFieldController battleFieldController, ButtonController buttonController, CowboysBand band) {
@@ -41,12 +42,12 @@ public class SelectPositionState implements IGameStates {
     @Override
     public void init() {
         this.buttonController.hideMenuButtons();
+        this.nextPossibleMovements = calculateNextMovements();
     }
 
     @Override
     public void render(SpriteBatch batch, float elapsedTime) {
-        Array<SelectorButtonMovePlayer> nextMovements = calculateNextMovements();
-        for(SelectorButtonMovePlayer bttn : nextMovements)
+        for(SelectorButtonMovePlayer bttn : nextPossibleMovements)
         {
             bttn.render(batch);
         }
