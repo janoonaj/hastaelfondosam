@@ -93,5 +93,9 @@ public class SelectPositionState implements IGameStates {
     {
         this.band.getMyCowboy().moveTo(selector.getBoardPos());
         battleFieldController.buttonPressed(selector);
+        for(SelectorButtonMovePlayer bttn : nextPossibleMovements)
+        {
+            bttn.disable();
+        }
     }
 }
