@@ -18,6 +18,7 @@ public class Cowboy {
     private Vector2 moveTo;
     private Integer moveToBoardPosition;
     private Vector2 currentDirection;
+    private boolean shooting = false;
 
     public Cowboy(CowboyView view, int id) {
 
@@ -32,6 +33,10 @@ public class Cowboy {
             if(this.moving) {
                 this.view.updateWalkingAnimation(this.currentDirection);
             }
+        }
+        if(this.shooting)
+        {
+
         }
         this.view.render(batch, elapsedTime);
     }
@@ -106,5 +111,11 @@ public class Cowboy {
         }
 
         this.setPos(nextPosPt);
+    }
+
+    public void shootTo(Integer boardPos) {
+        Point myPos = PositionsOnScreen.getScreenPos(this.boardPos);
+        Point shootingPos = PositionsOnScreen.getScreenPos(boardPos);
+        this.shooting = true;
     }
 }
