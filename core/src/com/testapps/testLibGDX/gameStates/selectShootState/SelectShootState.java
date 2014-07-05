@@ -76,6 +76,9 @@ public class SelectShootState implements IGameStates{
 
     public void selectorPushed(SelectorButtonShoot selectorButtonShoot) {
         this.band.getMyCowboy().shootTo(selectorButtonShoot.getBoardPos());
+
+        //TODO: more than one enemy
+        this.band.getEnemies().get(0).die();
         //battleFieldController.buttonPressed(selector);
         for(SelectorButtonShoot bttn : nextPossibleShoots)
         {

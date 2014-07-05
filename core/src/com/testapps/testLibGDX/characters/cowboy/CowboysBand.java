@@ -48,5 +48,7 @@ public class CowboysBand {
 
     public void dispose(){
         this.factory.dispose();
+        for(Cowboy cowboy : this.cowboysControllers.values())
+            cowboy.dispose();
     }
 }

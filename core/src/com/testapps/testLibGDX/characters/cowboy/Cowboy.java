@@ -83,6 +83,8 @@ public class Cowboy {
         //TODO: direction should be wrong, the movement is not linear.
         //Create it as class parameter does not solve the issue
         //Maybe problems between floats and integers?
+        //solution: http://gamedev.stackexchange.com/questions/74700/how-to-start-an-animation-just-once-on-an-event-in-libgdx
+        //It is creating a problem of infinite loop in shooting animation?
 
 
 
@@ -114,8 +116,46 @@ public class Cowboy {
     }
 
     public void shootTo(Integer boardPos) {
-        Point myPos = PositionsOnScreen.getScreenPos(this.boardPos);
-        Point shootingPos = PositionsOnScreen.getScreenPos(boardPos);
+        setShootingAnimation(boardPos);
         this.shooting = true;
     }
+
+    public void die(){
+        this.view.die();
+    }
+
+    public void dispose(){
+        this.view.dispose();
+    }
+
+    private void setShootingAnimation(Integer boardPos) {
+        Point myPos = PositionsOnScreen.getScreenPos(this.boardPos);
+        Point objectivePos = PositionsOnScreen.getScreenPos(boardPos);
+        Integer distX = objectivePos.x - myPos.x;
+        Integer distY = objectivePos.y - myPos.y;
+        if(Math.abs(distX) < Math.abs(distY))
+        {//Up//Down
+            if(distY > 0)
+            {
+                this.view.showAnimShootUp();
+            }
+            else
+            {
+                this.view.showAnimShootDown();
+            }
+        }
+        else
+        {//Right//Left
+            if(distX > 0)
+            {
+                this.view.showAnimShootRight();
+            }
+            else
+            {
+                this.view.showAnimShootLeft();
+            }
+        }
+    }
+
+
 }

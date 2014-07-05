@@ -1,6 +1,7 @@
 package com.testapps.testLibGDX.characters.cowboy.views;
 
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -26,21 +27,23 @@ public class CowboyView {
     protected Point pos;
     protected int width;
     protected int height;
+    protected Texture textureDead;
 
 
     public CowboyView(Texture texture) {
         this.texture = texture;
         pos = new Point(0, 0);
         this.stop(new CowboyOrientation(CowboyOrientation.STOP_N));
+        textureDead = new Texture(Gdx.files.local("gravestone.png"));
     }
 
     public void render(SpriteBatch batch, float elapsedTime) {
         renderBehindMainPlayer(batch, elapsedTime);
         renderMainPlayer(batch, elapsedTime);
-        renderFronMainPlayer(batch, elapsedTime);
+        renderFrontMainPlayer(batch, elapsedTime);
+
 
     }
-
     protected void renderBehindMainPlayer(SpriteBatch batch, float elapsedTime)
     {
 
@@ -61,7 +64,7 @@ public class CowboyView {
         }
     }
 
-    protected void renderFronMainPlayer(SpriteBatch batch, float elapsedTime)
+    protected void renderFrontMainPlayer(SpriteBatch batch, float elapsedTime)
     {
 
     }
@@ -151,5 +154,15 @@ public class CowboyView {
         {
             this.showAnimWalkRight();
         }
+    }
+
+    public void die() {
+        this.animation = null;
+        this.stoppedFrame = new TextureRegion(textureDead);
+        updateWidthAndHeight(this.stoppedFrame);
+    }
+
+    public void dispose(){
+        this.textureDead.dispose();
     }
 }
