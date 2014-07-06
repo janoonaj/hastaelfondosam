@@ -27,9 +27,9 @@ public class CowboysBand {
         return this.cowboysControllers.get(id);
     }
 
-    public void render(SpriteBatch batch, float elapsedTime){
+    public void render(SpriteBatch batch){
         for (Cowboy cb : this.cowboysControllers.values()) {
-            cb.render(batch, elapsedTime);
+            cb.render(batch);
         }
 
     }

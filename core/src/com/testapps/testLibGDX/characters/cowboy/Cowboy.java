@@ -1,6 +1,7 @@
 package com.testapps.testLibGDX.characters.cowboy;
 
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.testapps.testLibGDX.GameBoard;
@@ -13,7 +14,9 @@ public class Cowboy {
     private CowboyView view;
     private int boardPos;
 
-    final private float speed = 1f;
+    private float time = 0;
+
+    final private float speed = 4f;
     private boolean moving = false;
     private Vector2 moveTo;
     private Integer moveToBoardPosition;
@@ -26,10 +29,11 @@ public class Cowboy {
         this.id = id;
     }
 
-    public void render(SpriteBatch batch, float elapsedTime) {
+    public void render(SpriteBatch batch) {
         if(this.moving)
         {
-            updatePos(elapsedTime);
+            time += Gdx.graphics.getDeltaTime();
+            updatePos(time);
             if(this.moving) {
                 this.view.updateWalkingAnimation(this.currentDirection);
             }
@@ -38,7 +42,7 @@ public class Cowboy {
         {
 
         }
-        this.view.render(batch, elapsedTime);
+        this.view.render(batch, time);
     }
 
     public void stop(CowboyOrientation orientation){
@@ -69,15 +73,12 @@ public class Cowboy {
         Point pos3 = GameBoard.getScreenPos(boardPos);
         moveTo = new Vector2((float)(pos3.x), (float)(pos3.y));
         moving = true;
+        time = 0;
     }
 
     private void updatePos(float elapsedTime)
     {
         //TODO: direction should be wrong, the movement is not linear.
-        //Create it as class parameter does not solve the issue
-        //Maybe problems between floats and integers?
-        //solution: http://gamedev.stackexchange.com/questions/74700/how-to-start-an-animation-just-once-on-an-event-in-libgdx
-        //It is creating a problem of infinite loop in shooting animation?
 
 
 
