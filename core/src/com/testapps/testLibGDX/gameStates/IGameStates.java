@@ -6,7 +6,7 @@ public interface IGameStates {
 
     public void init();
 
-    public void render(SpriteBatch batch, float elapsedTime);
+    public void render(SpriteBatch batch);
 
     public void dispose();
 }

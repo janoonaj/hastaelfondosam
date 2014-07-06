@@ -70,23 +70,17 @@ public class Cowboy {
 
     public void moveTo(Integer boardPos) {
         moveToBoardPosition = boardPos;
-        Point pos3 = GameBoard.getScreenPos(boardPos);
-        moveTo = new Vector2((float)(pos3.x), (float)(pos3.y));
+        moveTo = GameBoard.getScreenPos(boardPos);
         moving = true;
         time = 0;
     }
 
     private void updatePos(float elapsedTime)
     {
-        //TODO: direction should be wrong, the movement is not linear.
-
-
-
         if(this.moving == false)
             return;
 
-        Vector2 currentPos = new Vector2((float)(this.view.getPos().x), (float)(this.view.getPos().y));
-        Vector2 newPos = currentPos.cpy();
+        Vector2 newPos = this.view.getPos().cpy();
 
         float realDistanceToEnd = Vector2.dst(newPos.x, newPos.y, moveTo.x, moveTo.y);
         currentDirection = this.moveTo.cpy();
@@ -94,19 +88,16 @@ public class Cowboy {
         newPos.x += this.speed * currentDirection.x * elapsedTime;
         newPos.y += this.speed * currentDirection.y * elapsedTime;
 
-        float distanceMoved = Vector2.dst(newPos.x, newPos.y, currentPos.x, currentPos.y);
-        Point nextPosPt = new Point((int)newPos.x, (int)newPos.y);
+        float distanceMoved = Vector2.dst(newPos.x, newPos.y, this.view.getPos().x, this.view.getPos().y);
         if(distanceMoved >= realDistanceToEnd)
         {
-            nextPosPt.x = (int) newPos.x;
-            nextPosPt.y = (int) newPos.y;
             this.moving = false;
             this.view.stop(new CowboyOrientation(CowboyOrientation.STOP_N));
             this.boardPos = this.moveToBoardPosition;
             this.moveToBoardPosition = null;
         }
 
-        this.view.setPos(nextPosPt);
+        this.view.setPos(newPos);
     }
 
     public void shootTo(Integer boardPos) {
@@ -123,10 +114,10 @@ public class Cowboy {
     }
 
     private void setShootingAnimation(Integer boardPos) {
-        Point myPos = GameBoard.getScreenPos(this.boardPos);
-        Point objectivePos = GameBoard.getScreenPos(boardPos);
-        Integer distX = objectivePos.x - myPos.x;
-        Integer distY = objectivePos.y - myPos.y;
+        Vector2 myPos = GameBoard.getScreenPos(this.boardPos);
+        Vector2 objectivePos = GameBoard.getScreenPos(boardPos);
+        float distX = objectivePos.x - myPos.x;
+        float distY = objectivePos.y - myPos.y;
         if(Math.abs(distX) < Math.abs(distY))
         {//Up//Down
             if(distY > 0)

@@ -24,7 +24,7 @@ public class CowboyView {
     private Texture texture;
     private CowboyAnimation animation;
     private TextureRegion stoppedFrame;
-    protected Point pos;
+    protected Vector2 pos;
     protected int width;
     protected int height;
     protected Texture textureDead;
@@ -32,7 +32,7 @@ public class CowboyView {
 
     public CowboyView(Texture texture) {
         this.texture = texture;
-        pos = new Point(0, 0);
+        pos = new Vector2(0, 0);
         this.stop(new CowboyOrientation(CowboyOrientation.STOP_N));
         textureDead = new Texture(Gdx.files.local("gravestone.png"));
     }
@@ -129,12 +129,13 @@ public class CowboyView {
         updateWidthAndHeight(this.stoppedFrame);
     }
 
-    public Point getPos() {
+    public Vector2 getPos() {
         return pos;
     }
 
-    public void setPos(Point pos) {
-        this.pos.setLocation(pos.x, pos.y);
+    public void setPos(Vector2 pos) {
+        this.pos.x = pos.x;
+        this.pos.y = pos.y;
     }
 
     public int getWidth() {

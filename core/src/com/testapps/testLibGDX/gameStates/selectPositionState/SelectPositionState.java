@@ -48,7 +48,7 @@ public class SelectPositionState implements IGameStates {
     }
 
     @Override
-    public void render(SpriteBatch batch, float elapsedTime) {
+    public void render(SpriteBatch batch) {
         for(SelectorButtonMovePlayer bttn : nextPossibleMovements)
         {
             bttn.render(batch);

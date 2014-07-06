@@ -6,7 +6,7 @@ import java.awt.Point;
 
 public interface IActionButton {
 
-    void render(SpriteBatch batch, float elapsedTime);
+    void render(SpriteBatch batch);
 
     Point getPos();
 

@@ -41,10 +41,10 @@ public class ButtonController implements InputProcessor{
         this.menuButtons.add(new ActionShootButton(texture, pos));
     }
 
-    public void render(SpriteBatch batch, float elapsedTime){
+    public void render(SpriteBatch batch){
         for(IActionButton button : this.menuButtons)
         {
-            button.render(batch, elapsedTime);
+            button.render(batch);
         }
     }
 

@@ -2,6 +2,7 @@ package com.testapps.testLibGDX.gameStates.selectShootState;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.testapps.testLibGDX.GameBoard;
 import com.testapps.testLibGDX.buttons.IButtonsSubscribed;
 
@@ -9,7 +10,7 @@ import java.awt.Point;
 
 public class SelectorButtonShoot implements IButtonsSubscribed {
     private Texture texture;
-    private Point pos;
+    private Vector2 pos;
     private SelectShootState state;
     private Integer boardPos;
     private Boolean enabled;

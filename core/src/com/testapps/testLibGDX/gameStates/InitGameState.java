@@ -20,7 +20,7 @@ public class InitGameState implements IGameStates{
     }
 
     @Override
-    public void render(SpriteBatch batch, float elapsedTime) {
+    public void render(SpriteBatch batch) {
 
     }
 

@@ -57,7 +57,7 @@ public class SelectShootState implements IGameStates{
     }
 
     @Override
-    public void render(SpriteBatch batch, float elapsedTime) {
+    public void render(SpriteBatch batch) {
         for(SelectorButtonShoot bttn : nextPossibleShoots)
         {
             bttn.render(batch);

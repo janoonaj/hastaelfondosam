@@ -57,9 +57,9 @@ public class BattleFieldController {
     }
 
     public void render(SpriteBatch batch, float elapsedTime) {
-        state.render(batch, elapsedTime);
+        state.render(batch);
         cowboysBand.render(batch);
-        buttonController.render(batch, elapsedTime);
+        buttonController.render(batch);
     }
 
     public void buttonPressed(IActionButton actionBttn) {

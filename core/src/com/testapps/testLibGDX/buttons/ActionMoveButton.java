@@ -16,7 +16,7 @@ public class ActionMoveButton implements IActionButton{
     }
 
     @Override
-    public void render(SpriteBatch batch, float elapsedTime) {
+    public void render(SpriteBatch batch) {
         if(this.visible)
             batch.draw(this.texture, pos.x, pos.y);
     }
