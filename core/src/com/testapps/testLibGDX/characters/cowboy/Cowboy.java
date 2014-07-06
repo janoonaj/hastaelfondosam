@@ -3,7 +3,7 @@ package com.testapps.testLibGDX.characters.cowboy;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.testapps.testLibGDX.PositionsOnScreen;
+import com.testapps.testLibGDX.GameBoard;
 import com.testapps.testLibGDX.characters.cowboy.views.CowboyView;
 
 import java.awt.Point;
@@ -45,14 +45,6 @@ public class Cowboy {
         this.view.stop(orientation);
     }
 
-    public Point getPos() {
-        return this.view.getPos();
-    }
-
-    public void setPos(Point pos) {
-        this.view.setPos(pos);
-    }
-
     public int getWidth() {
         return this.view.getWidth();
     }
@@ -67,13 +59,14 @@ public class Cowboy {
         return boardPos;
     }
 
-    public void setBoardPos(int boardPos) {
+    public void positionInBoard(int boardPos) {
         this.boardPos = boardPos;
+        this.view.setPos(GameBoard.getScreenPos(boardPos));
     }
 
     public void moveTo(Integer boardPos) {
         moveToBoardPosition = boardPos;
-        Point pos3 = PositionsOnScreen.getScreenPos(boardPos);
+        Point pos3 = GameBoard.getScreenPos(boardPos);
         moveTo = new Vector2((float)(pos3.x), (float)(pos3.y));
         moving = true;
     }
@@ -91,7 +84,7 @@ public class Cowboy {
         if(this.moving == false)
             return;
 
-        Vector2 currentPos = new Vector2((float)(this.getPos().x), (float)(this.getPos().y));
+        Vector2 currentPos = new Vector2((float)(this.view.getPos().x), (float)(this.view.getPos().y));
         Vector2 newPos = currentPos.cpy();
 
         float realDistanceToEnd = Vector2.dst(newPos.x, newPos.y, moveTo.x, moveTo.y);
@@ -112,7 +105,7 @@ public class Cowboy {
             this.moveToBoardPosition = null;
         }
 
-        this.setPos(nextPosPt);
+        this.view.setPos(nextPosPt);
     }
 
     public void shootTo(Integer boardPos) {
@@ -129,8 +122,8 @@ public class Cowboy {
     }
 
     private void setShootingAnimation(Integer boardPos) {
-        Point myPos = PositionsOnScreen.getScreenPos(this.boardPos);
-        Point objectivePos = PositionsOnScreen.getScreenPos(boardPos);
+        Point myPos = GameBoard.getScreenPos(this.boardPos);
+        Point objectivePos = GameBoard.getScreenPos(boardPos);
         Integer distX = objectivePos.x - myPos.x;
         Integer distY = objectivePos.y - myPos.y;
         if(Math.abs(distX) < Math.abs(distY))

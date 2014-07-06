@@ -2,7 +2,7 @@ package com.testapps.testLibGDX.gameStates.selectPositionState;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.testapps.testLibGDX.PositionsOnScreen;
+import com.testapps.testLibGDX.GameBoard;
 import com.testapps.testLibGDX.buttons.IButtonsSubscribed;
 
 import java.awt.Point;
@@ -17,7 +17,7 @@ public class SelectorButtonMovePlayer implements IButtonsSubscribed {
 
     public SelectorButtonMovePlayer(Texture texture, Integer boardPos, SelectPositionState state) {
         this.texture = texture;
-        this.pos = PositionsOnScreen.getScreenPos(boardPos);
+        this.pos = GameBoard.getScreenPos(boardPos);
         this.pos.x -= texture.getWidth() / 2;
         this.pos.y -= texture.getHeight() / 2;
         this.boardPos = boardPos;

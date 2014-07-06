@@ -5,12 +5,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.testapps.testLibGDX.BattleFieldController;
-import com.testapps.testLibGDX.PositionsOnScreen;
 import com.testapps.testLibGDX.buttons.ButtonController;
 import com.testapps.testLibGDX.characters.cowboy.CowboysBand;
 import com.testapps.testLibGDX.gameStates.IGameStates;
 
-import java.awt.Point;
 import java.util.HashMap;
 
 public class SelectPositionState implements IGameStates {
