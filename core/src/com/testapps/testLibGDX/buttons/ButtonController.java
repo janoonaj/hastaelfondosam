@@ -5,11 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.testapps.testLibGDX.BattleFieldController;
-import com.testapps.testLibGDX.Utils;
-
-import java.awt.Point;
 
 public class ButtonController implements InputProcessor{
     Array<IActionButton> menuButtons;
@@ -29,15 +27,15 @@ public class ButtonController implements InputProcessor{
 
     private void createMoveButton() {
         Texture texture = new Texture(Gdx.files.internal("footprint.png"));
-        Point pos = new Point(Gdx.graphics.getWidth() / 40,
-                                Gdx.graphics.getHeight() - (Gdx.graphics.getHeight() / 40) - texture.getHeight());
+        Vector3 pos = new Vector3(Gdx.graphics.getWidth() / 40,
+                                Gdx.graphics.getHeight() - (Gdx.graphics.getHeight() / 40) - texture.getHeight(), 0);
         this.menuButtons.add(new ActionMoveButton(texture, pos));
     }
 
     private void createShootButton(){
         Texture texture = new Texture(Gdx.files.internal("gun.png"));
-        Point pos = new Point(Gdx.graphics.getWidth() / 40 + texture.getWidth() * 2,
-                Gdx.graphics.getHeight() - (Gdx.graphics.getHeight() / 40) - texture.getHeight());
+        Vector3 pos = new Vector3(Gdx.graphics.getWidth() / 40 + texture.getWidth() * 2,
+                Gdx.graphics.getHeight() - (Gdx.graphics.getHeight() / 40) - texture.getHeight(), 0);
         this.menuButtons.add(new ActionShootButton(texture, pos));
     }
 

@@ -1,14 +1,13 @@
 package com.testapps.testLibGDX.buttons;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
-import java.awt.Point;
+import com.badlogic.gdx.math.Vector3;
 
 public interface IActionButton {
 
     void render(SpriteBatch batch);
 
-    Point getPos();
+    Vector3 getPos();
 
     //Return: pressed
     Boolean touchEvent(int screenX, int screenY);

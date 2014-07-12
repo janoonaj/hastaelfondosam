@@ -7,8 +7,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.testapps.testLibGDX.GameBoard;
 import com.testapps.testLibGDX.characters.cowboy.views.CowboyView;
 
-import java.awt.Point;
-
 public class Cowboy {
     private int id;
     private CowboyView view;

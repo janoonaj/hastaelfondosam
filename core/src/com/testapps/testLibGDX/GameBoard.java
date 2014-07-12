@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.testapps.testLibGDX.characters.cowboy.Cowboy;
 import com.testapps.testLibGDX.characters.cowboy.CowboysBand;
 
-import java.awt.Point;
 import java.util.HashMap;
 
 public class GameBoard {

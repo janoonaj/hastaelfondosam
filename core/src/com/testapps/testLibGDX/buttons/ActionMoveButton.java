@@ -2,15 +2,14 @@ package com.testapps.testLibGDX.buttons;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
-import java.awt.Point;
+import com.badlogic.gdx.math.Vector3;
 
 public class ActionMoveButton implements IActionButton{
     Texture texture;
-    Point pos;
+    Vector3 pos;
     Boolean visible = true;
 
-    public ActionMoveButton(Texture texture, Point pos) {
+    public ActionMoveButton(Texture texture, Vector3 pos) {
         this.texture = texture;
         this.pos = pos;
     }
@@ -22,7 +21,7 @@ public class ActionMoveButton implements IActionButton{
     }
 
     @Override
-    public Point getPos() {
+    public Vector3 getPos() {
         return pos;
     }
 

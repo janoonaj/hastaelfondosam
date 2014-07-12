@@ -15,8 +15,6 @@ import com.testapps.testLibGDX.characters.cowboy.animations.CowboyShootingUp;
 import com.testapps.testLibGDX.characters.cowboy.animations.CowboyWalkingLeft;
 import com.testapps.testLibGDX.characters.cowboy.animations.CowboyWalkingRight;
 
-import java.awt.Point;
-
 public class CowboyView {
 
     private final float FRAME_DURATION = 1/15f;
@@ -34,7 +32,7 @@ public class CowboyView {
         this.texture = texture;
         pos = new Vector2(0, 0);
         this.stop(new CowboyOrientation(CowboyOrientation.STOP_N));
-        textureDead = new Texture(Gdx.files.local("gravestone.png"));
+        textureDead = new Texture(Gdx.files.internal("gravestone.png"));
     }
 
     public void render(SpriteBatch batch, float elapsedTime) {
